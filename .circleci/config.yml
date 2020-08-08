@@ -11,28 +11,27 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-    - image: circleci/python:3.7.1
+    - image: circleci/maven:3.6-jdk-8
 
     steps:
     - checkout
     - run:
         name: install dependencies
         command: |
-          make zip
           set +o pipefail
           LATEST_VERSION=$(curl --silent "https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
           set -o pipefail
           [  -z "$LATEST_VERSION" ] && LATEST_VERSION="0.0.0"
           VERSION=$(echo $LATEST_VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
           VERSION_NUMBER=$(echo $VERSION | sed 's/^v\(.*\)$/\1/')
-          echo $VERSION_NUMBER > version && zip -ur emr-launcher.zip version
-          mv emr-launcher.zip emr-launcher-$VERSION_NUMBER.zip
+          mvn versions:set -DnewVersion=$VERSION_NUMBER
+          mvn install
+          mv target/adg-exporter-$VERSION_NUMBER.jar
 
     - persist_to_workspace:
         root: .
         paths:
-        - emr-launcher-*.zip
-        - Pipfile
+        - adg-exporter-*.jar
 
   snyk-pr:
     docker:
