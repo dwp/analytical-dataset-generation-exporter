@@ -26,12 +26,12 @@ jobs:
           VERSION_NUMBER=$(echo $VERSION | sed 's/^v\(.*\)$/\1/')
           mvn versions:set -DnewVersion=$VERSION_NUMBER
           mvn install
-          mv target/adg-exporter-$VERSION_NUMBER.jar
+          mv target/exporter-$VERSION_NUMBER.jar
 
     - persist_to_workspace:
         root: .
         paths:
-        - adg-exporter-*.jar
+        - exporter-*.jar
 
   snyk-pr:
     docker:

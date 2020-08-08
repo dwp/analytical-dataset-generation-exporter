@@ -1,4 +1,4 @@
-package org.apache.spark.metrics.source;
+package org.apache.spark.metrics.source.adg.exporter;
 
 import com.codahale.metrics.Gauge;
 
