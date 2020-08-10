@@ -30,13 +30,18 @@ public class CollectionProcessingTimeGauge implements Gauge {
 
     private Integer extractValue(BufferedReader br) {
         String line;
-        while ((line = br.readLine()) != null) {
-            if (line.contains(",")) {
-                String[] kvp = line.split(",");
-                if (kvp[0].equals(ALL_COLLECTIONS_ID)) {
-                    return Integer.parseInt(kvp[1]);
+        try {
+            while ((line = br.readLine()) != null) {
+                if (line.contains(",")) {
+                    String[] kvp = line.split(",");
+                    if (kvp[0].equals(ALL_COLLECTIONS_ID)) {
+                        return Integer.parseInt(kvp[1]);
+                    }
                 }
             }
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return 0;
         }
         return 0;
     }
