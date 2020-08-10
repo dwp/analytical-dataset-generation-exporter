@@ -3,6 +3,7 @@ package org.apache.spark.metrics.source.adg.exporter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.codahale.metrics.Gauge;
 
@@ -18,6 +19,10 @@ public class CollectionProcessingTimeGauge implements Gauge {
             BufferedReader br = new BufferedReader(fr);
             return extractValue(br);
         } catch (FileNotFoundException e) {
+            System.out.println(e.toString());
+            return 0;
+        }
+        catch (IOException e) {
             System.out.println(e.toString());
             return 0;
         }
