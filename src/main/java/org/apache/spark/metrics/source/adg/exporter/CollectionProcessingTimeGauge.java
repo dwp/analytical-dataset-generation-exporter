@@ -8,8 +8,8 @@ import com.codahale.metrics.Gauge;
 
 public class CollectionProcessingTimeGauge implements Gauge {
 
-    private static String COLLECTION_PROCESSING_TIME_FILE = "/opt/emr/metrics/processing_times.csv"
-    private static String ALL_COLLECTIONS_ID = "all_collections"
+    private static String COLLECTION_PROCESSING_TIME_FILE = "/opt/emr/metrics/processing_times.csv";
+    private static String ALL_COLLECTIONS_ID = "all_collections";
 
     @Override
     public Integer getValue() {
