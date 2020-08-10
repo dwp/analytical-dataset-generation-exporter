@@ -14,11 +14,11 @@ public class CollectionProcessingTimeGauge implements Gauge {
     @Override
     public Integer getValue() {
         try {
-            FileReader fr = new FileReader(COLLECTION_PROCESSING_TIME_FILE)
-            BufferedReader br = new BufferedReader(fr)
+            FileReader fr = new FileReader(COLLECTION_PROCESSING_TIME_FILE);
+            BufferedReader br = new BufferedReader(fr);
             return extractValue(br);
         } catch (FileNotFoundException e) {
-            System.out.println(e.toString())
+            System.out.println(e.toString());
             return 0;
         }
     }
