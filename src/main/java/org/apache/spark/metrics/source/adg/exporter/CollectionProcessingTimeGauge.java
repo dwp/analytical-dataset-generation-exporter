@@ -10,7 +10,7 @@ import com.codahale.metrics.Gauge;
 public class CollectionProcessingTimeGauge implements Gauge {
 
     private static String COLLECTION_PROCESSING_TIME_FILE = "/opt/emr/metrics/processing_times.csv";
-    private collection;
+    private String collection;
 
     public CollectionProcessingTimeGauge(String collection) {
         this.collection = collection;
