@@ -10,7 +10,11 @@ import com.codahale.metrics.Gauge;
 public class CollectionProcessingTimeGauge implements Gauge {
 
     private static String COLLECTION_PROCESSING_TIME_FILE = "/opt/emr/metrics/processing_times.csv";
-    private static String ALL_COLLECTIONS_ID = "all_collections";
+    private collection;
+
+    public CollectionProcessingTimeGauge(String collection) {
+        this.collection = collection;
+    }
 
     @Override
     public Integer getValue() {
@@ -34,7 +38,7 @@ public class CollectionProcessingTimeGauge implements Gauge {
             while ((line = br.readLine()) != null) {
                 if (line.contains(",")) {
                     String[] kvp = line.split(",");
-                    if (kvp[0].equals(ALL_COLLECTIONS_ID)) {
+                    if (kvp[0].equals(this.collection)) {
                         return Integer.parseInt(kvp[1]);
                     }
                 }
