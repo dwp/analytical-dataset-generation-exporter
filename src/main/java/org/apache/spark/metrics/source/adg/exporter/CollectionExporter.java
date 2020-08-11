@@ -5,6 +5,8 @@ import com.codahale.metrics.MetricRegistry;
 import org.apache.spark.metrics.source.Source;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Base64;
 
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
