@@ -38,8 +38,8 @@ public class CollectionExporter implements Source {
         for (String collection : collections) {
             collectionProcessingTimeGauge = new CollectionProcessingTimeGauge(collection);
             collectionSizeGauge = new CollectionSizeGauge(collection);
-            metricRegistry.register(collection, collectionProcessingTimeGauge);
-            metricRegistry.register(collection, collectionSizeGauge);
+            metricRegistry.register(collection + "_processing_time", collectionProcessingTimeGauge);
+            metricRegistry.register(collection + "_collection_size", collectionSizeGauge);
         }
     }
 
