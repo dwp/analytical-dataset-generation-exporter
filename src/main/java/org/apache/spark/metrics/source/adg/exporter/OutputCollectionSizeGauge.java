@@ -12,7 +12,7 @@ public class OutputCollectionSizeGauge implements Gauge {
     private static String COLLECTION_SIZE_FILE = "/opt/emr/metrics/adg_collection_size.csv";
     private String collection;
 
-    public AdgCollectionSizeGauge(String collection) {
+    public OutputCollectionSizeGauge(String collection) {
         this.collection = collection;
     }
 
