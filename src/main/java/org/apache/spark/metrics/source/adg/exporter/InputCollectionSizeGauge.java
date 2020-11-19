@@ -7,12 +7,12 @@ import java.io.IOException;
 
 import com.codahale.metrics.Gauge;
 
-public class CollectionSizeGauge implements Gauge {
+public class InputCollectionSizeGauge implements Gauge {
 
-    private static String COLLECTION_SIZE_FILE = "/opt/emr/metrics/collection_size.csv";
+    private static String COLLECTION_SIZE_FILE = "/opt/emr/metrics/htme_collection_size.csv";
     private String collection;
 
-    public CollectionSizeGauge(String collection) {
+    public InputCollectionSizeGauge(String collection) {
         this.collection = collection;
     }
 
