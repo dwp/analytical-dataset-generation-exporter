@@ -30,7 +30,7 @@ public class CollectionExporter implements Source {
     MetricRegistry metricRegistry;
     Gauge collectionProcessingTimeGauge;
     Gauge InputCollectionSizeGauge;
-    Gauge OutputCollectionSizeGauge
+    Gauge OutputCollectionSizeGauge;
     ArrayList<String> collections;
 
     public CollectionExporter() {
