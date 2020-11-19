@@ -29,7 +29,8 @@ public class CollectionExporter implements Source {
 
     MetricRegistry metricRegistry;
     Gauge collectionProcessingTimeGauge;
-    Gauge collectionSizeGauge;
+    Gauge InputCollectionSizeGauge;
+    Gauge OutputCollectionSizeGauge
     ArrayList<String> collections;
 
     public CollectionExporter() {
@@ -37,9 +38,11 @@ public class CollectionExporter implements Source {
         collections = getMetricList();
         for (String collection : collections) {
             collectionProcessingTimeGauge = new CollectionProcessingTimeGauge(collection);
-            collectionSizeGauge = new CollectionSizeGauge(collection);
+            InputCollectionSizeGauge = new InputCollectionSizeGauge(collection);
+            OutputCollectionSizeGauge = new OutputCollectionSizeGauge(collection);
             metricRegistry.register(collection + "_processing_time", collectionProcessingTimeGauge);
-            metricRegistry.register(collection + "_collection_size", collectionSizeGauge);
+            metricRegistry.register(collection + "_input_collection_size", InputCollectionSizeGauge);
+            metricRegistry.register(collection + "_output_collection_size", OutputCollectionSizeGauge);
         }
     }
 
