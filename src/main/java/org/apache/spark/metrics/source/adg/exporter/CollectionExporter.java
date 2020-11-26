@@ -44,6 +44,13 @@ public class CollectionExporter implements Source {
             metricRegistry.register(collection + "_input_collection_size", InputCollectionSizeGauge);
             metricRegistry.register(collection + "_output_collection_size", OutputCollectionSizeGauge);
         }
+        List<String> emrHardware = Arrays.asList("master", "nodes");
+        for (String node_type : emrHardware) {
+            metricRegistry.register(node_type + "_cpu_utilisation", CpuUtilisationGauge);
+            metricRegistry.register(node_type + "_memory_utilisation", MemoryUtilisationGauge);
+            metricRegistry.register(node_type + "_disk_utilisation", DiskUtilisationGauge);
+            metricRegistry.register(node_type + "_network_utilisation", NetworkUtilisationGauge);
+        }
     }
 
     @Override
