@@ -7,12 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CpuUtilisationGauge implements Gauge {
+public class NodesMemoryUtilisationGauge implements Gauge {
 
-    private static String CPU_UTILISATION_FILE = "/opt/emr/metrics/adg_master_cpu_utilisation.csv";
+    private static String CPU_UTILISATION_FILE = "/opt/emr/metrics/adg_nodes_memory_utilisation.csv";
     private String collection;
 
-    public CpuUtilisationGauge(String nodeType) {
+    public NodesMemoryUtilisationGauge(String nodeType) {
         this.nodeType = nodeType;
     }
 
