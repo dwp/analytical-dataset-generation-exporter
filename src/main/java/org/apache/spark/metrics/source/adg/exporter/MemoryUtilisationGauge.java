@@ -7,14 +7,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class NodesMemoryUtilisationGauge implements Gauge {
+public class MemoryUtilisationGauge implements Gauge {
+    
+    private String nodeType;
 
-    private static String CPU_UTILISATION_FILE = "/opt/emr/metrics/adg_nodes_memory_utilisation.csv";
-    private String collection;
-
-    public NodesMemoryUtilisationGauge(String nodeType) {
+    public MemoryUtilisationGauge(String nodeType) {
         this.nodeType = nodeType;
     }
+
+    private String CPU_UTILISATION_FILE = "/opt/emr/metrics/adg_" + this.nodeType + "_memory_utilisation.csv";
 
     @Override
     public Integer getValue() {
@@ -38,7 +39,7 @@ public class NodesMemoryUtilisationGauge implements Gauge {
             while ((line = br.readLine()) != null) {
                 if (line.contains(",")) {
                     String[] kvp = line.split(",");
-                    if (kvp[0].equals(this.collection)) {
+                    if (kvp[0].equals(this.nodeType)) {
                         return Integer.parseInt(kvp[1]);
                     }
                 }

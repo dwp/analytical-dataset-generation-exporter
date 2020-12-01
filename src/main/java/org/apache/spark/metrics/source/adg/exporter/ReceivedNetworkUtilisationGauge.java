@@ -7,14 +7,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class MasterDiskUtilisationGauge implements Gauge {
+public class ReceivedNetworkUtilisationGauge implements Gauge {
 
-    private static String CPU_UTILISATION_FILE = "/opt/emr/metrics/adg_master_disk_utilisation.csv";
-    private String collection;
+    private String nodeType;
 
-    public MasterDiskUtilisationGauge(String nodeType) {
+    public ReceivedNetworkUtilisationGauge(String nodeType) {
         this.nodeType = nodeType;
     }
+    private String CPU_UTILISATION_FILE = "/opt/emr/metrics/adg_" + this.nodeType + "_received_bytes.csv";
 
     @Override
     public Integer getValue() {
@@ -38,7 +38,7 @@ public class MasterDiskUtilisationGauge implements Gauge {
             while ((line = br.readLine()) != null) {
                 if (line.contains(",")) {
                     String[] kvp = line.split(",");
-                    if (kvp[0].equals(this.collection)) {
+                    if (kvp[0].equals(this.nodeType)) {
                         return Integer.parseInt(kvp[1]);
                     }
                 }

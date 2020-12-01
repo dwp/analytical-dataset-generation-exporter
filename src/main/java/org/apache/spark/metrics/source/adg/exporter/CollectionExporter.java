@@ -31,6 +31,11 @@ public class CollectionExporter implements Source {
     Gauge collectionProcessingTimeGauge;
     Gauge InputCollectionSizeGauge;
     Gauge OutputCollectionSizeGauge;
+    Gauge CpuUtilisationGauge;
+    Gauge DiskUtilisationGauge;
+    Gauge MemoryUtilisationGauge;
+    Gauge ReceivedNetworkUtilisationGauge;
+    Gauge TransferredNetworkUtilisationGauge;
     ArrayList<String> collections;
 
     public CollectionExporter() {
@@ -44,13 +49,28 @@ public class CollectionExporter implements Source {
             metricRegistry.register(collection + "_input_collection_size", InputCollectionSizeGauge);
             metricRegistry.register(collection + "_output_collection_size", OutputCollectionSizeGauge);
         }
-        List<String> emrHardware = Arrays.asList("master", "nodes");
-        for (String node_type : emrHardware) {
-            metricRegistry.register(node_type + "_cpu_utilisation", CpuUtilisationGauge);
-            metricRegistry.register(node_type + "_memory_utilisation", MemoryUtilisationGauge);
-            metricRegistry.register(node_type + "_disk_utilisation", DiskUtilisationGauge);
-            metricRegistry.register(node_type + "_network_utilisation", NetworkUtilisationGauge);
+        ArrayList<String> emrHardware = new ArrayList<String>();
+        emrHardware.add("Master");
+        emrHardware.add("Nodes");
+        for (String nodeType : emrHardware) {
+            CpuUtilisationGauge = new CpuUtilisationGauge(nodeType);
+            MemoryUtilisationGauge = new MemoryUtilisationGauge(nodeType);
+            DiskUtilisationGauge = new DiskUtilisationGauge(nodeType);
+            ReceivedNetworkUtilisationGauge = new ReceivedNetworkUtilisationGauge(nodeType);
+            TransferredNetworkUtilisationGauge = new TransferredNetworkUtilisationGauge(nodeType);
+
+            metricRegistry.register(nodeType + "_cpu_utilisation", CpuUtilisationGauge);
+            System.out.println("registered cpu util");
+            metricRegistry.register(nodeType + "_disk_utilisation", MemoryUtilisationGauge);
+            System.out.println("registered disk util");
+            metricRegistry.register(nodeType + "_free_memory", DiskUtilisationGauge);
+            System.out.println("registered memory util");
+            metricRegistry.register(nodeType + "_received_bytes", ReceivedNetworkUtilisationGauge);
+            System.out.println("registered rx util");
+            metricRegistry.register(nodeType + "_transferred_bytes", TransferredNetworkUtilisationGauge);
+            System.out.println("registered tx util");
         }
+
     }
 
     @Override
