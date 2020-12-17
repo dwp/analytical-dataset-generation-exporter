@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk-core</artifactId>
-            <version>1.11.907</version>
+            <version>1.11.908</version>
         </dependency>
     </dependencies>
     <build>
