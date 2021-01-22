@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.NumberFormatException;
 
 public class OutputCollectionSizeGauge implements Gauge {
 
@@ -27,6 +28,10 @@ public class OutputCollectionSizeGauge implements Gauge {
             return 0;
         }
         catch (IOException e) {
+            System.out.println(e.toString());
+            return 0;
+        }
+        catch (NumberFormatException e) {
             System.out.println(e.toString());
             return 0;
         }
