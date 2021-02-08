@@ -76,7 +76,7 @@ public class CollectionExporter implements Source {
     }
 
     private String getSecret() {
-        String secretName = "/concourse/dataworks/adg";
+        String secretName = "/concourse/dataworks/adg/full";
         String region = "eu-west-2";
         AWSSecretsManager client  = AWSSecretsManagerClientBuilder.standard().withRegion(region).build();
         GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest().withSecretId(secretName);
