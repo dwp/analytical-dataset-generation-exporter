@@ -81,7 +81,7 @@ public class CollectionExporter implements Source {
         return metrics;
     }
 
-    private String getSecret(secretName) {
+    private String getSecret(String secretName) {
         String region = "eu-west-2";
         AWSSecretsManager client  = AWSSecretsManagerClientBuilder.standard().withRegion(region).build();
         GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest().withSecretId(secretName);
