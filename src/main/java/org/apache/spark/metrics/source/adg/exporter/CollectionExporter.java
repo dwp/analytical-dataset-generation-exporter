@@ -35,7 +35,13 @@ public class CollectionExporter implements Source {
 
     public CollectionExporter() {
         metricRegistry = new MetricRegistry();
-        collections = getMetricList();
+        String secrets_arr[] = new String[] { "/concourse/dataworks/adg/fulls", "/concourse/dataworks/adg/incrementals"};
+        List<String> secrets = Arrays.asList(secrets_arr);
+        Set<String> collections = new HashSet<String>();
+        for(String secret: secrets){
+            collections.addAll(getMetricList(secret));
+        }
+
         for (String collection : collections) {
             collectionProcessingTimeGauge = new CollectionProcessingTimeGauge(collection);
             InputCollectionSizeGauge = new InputCollectionSizeGauge(collection);
@@ -56,10 +62,10 @@ public class CollectionExporter implements Source {
         return metricRegistry;
     }
 
-    private ArrayList<String> getMetricList() {
+    private ArrayList<String> getMetricList(String secret) {
         ArrayList<String> metrics = new ArrayList<String>();
         Gson gson = new Gson();
-        JsonElement jsonElement = new JsonParser().parse(getSecret());
+        JsonElement jsonElement = new JsonParser().parse(getSecret(secret));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         jsonObject = jsonObject.getAsJsonObject("collections_all");
         Set<Map.Entry<String, JsonElement>> entries = jsonObject.entrySet();
@@ -75,8 +81,7 @@ public class CollectionExporter implements Source {
         return metrics;
     }
 
-    private String getSecret() {
-        String secretName = "/concourse/dataworks/adg/full";
+    private String getSecret(secretName) {
         String region = "eu-west-2";
         AWSSecretsManager client  = AWSSecretsManagerClientBuilder.standard().withRegion(region).build();
         GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest().withSecretId(secretName);
