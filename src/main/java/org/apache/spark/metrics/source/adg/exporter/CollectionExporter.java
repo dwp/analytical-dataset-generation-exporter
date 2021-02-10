@@ -17,6 +17,7 @@ import com.amazonaws.services.secretsmanager.model.InternalServiceErrorException
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
