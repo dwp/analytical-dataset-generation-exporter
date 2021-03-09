@@ -3,7 +3,7 @@ name: Master
 on:
   push:
     branches:
-      - master
+      - rename-release
 
 jobs:
   get-publish-version:
