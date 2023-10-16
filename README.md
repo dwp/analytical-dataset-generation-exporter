@@ -1,3 +1,5 @@
+# DO NOT USE THIS REPO - MIGRATED TO GITLAB
+
 # analytical-dataset-generation-exporter
 
 ## Custom spark metric exporter for the Analytical Dataset Generator
